@@ -1,0 +1,212 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.button {
+    padding: 15px 25px;
+    margin: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+/* Style for Asynchronous */
+
+.container-asynchronous {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+  
+.container-asynchronous h1 {
+    text-align: center;
+    color: #333;
+}
+  
+.container-asynchronous #events {
+    margin-top: 30px;
+}
+  
+.container-asynchronous .event {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    border-left: 6px solid #3498db;
+}
+  
+.container-asynchronous .event:before {
+    content: "•";
+    margin-right: 10px;
+    color: #3498db;
+}
+  
+.container-asynchronous .event.finished {
+    background-color: #dff0d8;
+    border-left-color: #5cb85c;
+}
+
+/* Style for Composition */
+
+.container-composition {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container-composition h1 {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+.container-composition button {
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.container-composition button:hover {
+    background-color: #0056b3;
+}
+
+.container-composition table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.container-composition th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.container-composition th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.container-composition .form-group {
+    margin-bottom: 15px;
+}
+
+.container-composition label {
+    font-weight: bold;
+    display: block;
+}
+
+.container-composition input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* Style for Polymorphism */
+
+.container-polymorphism {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+.container-polymorphism h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.container-polymorphism form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-polymorphism label {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.container-polymorphism select, input[type="number"], button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.container-polymorphism button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.container-polymorphism button:hover {
+    background-color: #0056b3;
+}
+
+.container-polymorphism #result {
+    text-align: center;
+    font-size: 18px;
+}

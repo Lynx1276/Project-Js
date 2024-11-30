@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeSim</title>
+  <link rel="stylesheet" href="style.css">
+   <!-- Google Fonts - Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+</head>
+
+<body>
+  <div class="container-asynchronous">
+    <h1>LifeSim: An Asynchronous Simulation of Human Life</h1>
+    <div id="events">
+      <div class="event"></div>
+    </div>
+  </div>
+
+<!--
+    A metaphorical asynchronous JavaScript program that mirrors some aspects of human life. 
+    Let's call it "LifeSim"
+
+    In this metaphorical simulation:
+
+    Each life event is represented as an asynchronous task, mimicking the unpredictable nature of real-life events.
+    The liveLife() function orchestrates these events sequentially, reflecting the chronological order of human life.
+    Events like "Education", "Career", "Marriage", "Parenthood", "Midlife Crisis", and "Retirement" are simulated with varying durations.
+    Parenthood is represented with two concurrent asynchronous tasks, reflecting the challenge of raising multiple children.
+    The program logs the start and end of each event, providing insight into the passage of time in a person's life.
+    This code captures the essence of human life in an asynchronous JavaScript program, highlighting the unpredictability, challenges, and milestones that individuals encounter along the way.
+-->
+
+
+  <script>
+    // LifeSim: An asynchronous simulation of human life
+  // Define a function to represent a task or event in life
+  function lifeEvent(event, duration) {
+      return new Promise(resolve => {
+        const eventElement = document.createElement("div");
+        eventElement.classList.add("event");
+        eventElement.textContent = `(${event}): Starting...`;
+        document.getElementById("events").appendChild(eventElement);
+    
+        setTimeout(() => {
+          eventElement.textContent = `(${event}): Finished after ${duration} milliseconds`;
+          eventElement.classList.add("finished");
+          resolve();
+        }, duration);
+      });
+    }
+    
+    // Define various life events/tasks
+    async function liveLife() {
+      const events = ["Education", "Career", "Marriage", "Parenthood: Child 1", "Parenthood: Child 2", "Midlife Crisis", "Retirement"];
+    
+      console.log("Life begins...");
+      const eventsDiv = document.getElementById("events");
+      for (const event of events) {
+        await lifeEvent(event, Math.random() * 5000 + 3000); // Random duration between 3000 to 8000 milliseconds
+      }
+      console.log("Life ends... Time to reflect.");
+    }
+    
+    // Start the LifeSim
+    liveLife();
+  </script>
+</body>
+</html>

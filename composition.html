@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Details</title>
+    <link rel="stylesheet" href="style.css">
+     <!-- Google Fonts - Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+</head>
+<body>
+    <div class="container-composition">
+        <h1>Employee Details</h1>
+        <div class="buttons">
+            <button onclick="addEmployee()">Add Employee</button>
+            <button onclick="displayEmployees()">Display Employees</button>
+            <button onclick="searchEmployeeByName()">Search Employee</button>
+        </div>
+        <div id="employeeData"></div>
+    </div>
+
+    <!--
+        The employee management program, built using HTML and JavaScript, offers a simple yet effective way to manage employee details through a web interface. 
+        This program allows users to add new employees, display all employees, and search for employees by name. By combining HTML for structure and JavaScript for functionality, the program provides a seamless user experience.
+        Three buttons (<button>) that trigger different JavaScript functions: adding an employee, displaying all employees, and searching for an employee.
+        A <div> with the ID employeeData where the employee details will be dynamically inserted and displayed.
+        The JavaScript code provides the functionality to interact with employee data. It defines an Employee object, manages an array of employee objects, and includes functions to add, display, and search for employees.
+        The Employee function acts as a constructor, defining the structure of an Employee object with properties: name, age, position, and salary.
+        An array named employees is initialized to store Employee objects.
+        The displayEmployees function generates HTML content to display all employees in a table format. It iterates over the employees array, creating a row for each employee with their details. 
+        This HTML content is then inserted into the employeeData div, updating the web page dynamically.
+        The searchEmployeeByName function prompts the user to enter a name and searches the employees array for matches. It uses the filter method to find employees with names matching the input. 
+        If matches are found, it displays them in a table. If no matches are found, it alerts the user that no such employee exists.
+        This employee management program showcases how HTML and JavaScript can be effectively combined to create a functional and interactive web application. 
+        HTML provides the structural backbone, while JavaScript brings the page to life with dynamic data management and user interactions. 
+        This composition not only demonstrates the power of client-side scripting but also highlights the importance of seamless integration between HTML and JavaScript to deliver a smooth and responsive user experience.
+    -->
+
+    <script>
+        function Employee(name, age, position, salary) {
+            this.name = name;
+            this.age = age;
+            this.position = position;
+            this.salary = salary;
+        }
+
+        var employees = [];
+
+        function addEmployee() {
+            var name = prompt("Enter employee name:");
+            var age = parseInt(prompt("Enter employee age:"));
+            var position = prompt("Enter employee position:");
+            var salary = parseFloat(prompt("Enter employee salary:"));
+
+            var newEmployee = new Employee(name, age, position, salary);
+
+            employees.push(newEmployee);
+        }
+
+        function displayEmployees() {
+            var tableContent = "<h2>Employee Details</h2>";
+            tableContent += "<table>";
+            tableContent += "<tr><th>Name</th><th>Age</th><th>Position</th><th>Salary</th></tr>";
+            employees.forEach(function(employee) {
+                tableContent += "<tr>";
+                tableContent += "<td>" + employee.name + "</td>";
+                tableContent += "<td>" + employee.age + "</td>";
+                tableContent += "<td>" + employee.position + "</td>";
+                tableContent += "<td>" + employee.salary + "</td>";
+                tableContent += "</tr>";
+            });
+            tableContent += "</table>";
+            document.getElementById("employeeData").innerHTML = tableContent;
+        }
+
+        function searchEmployeeByName() {
+            var searchName = prompt("Enter employee name to search:");
+            var foundEmployees = employees.filter(function(employee) {
+                return employee.name.toLowerCase() === searchName.toLowerCase();
+            });
+            if (foundEmployees.length > 0) {
+                var searchResult = "<h2>Search Results</h2>";
+                searchResult += "<table>";
+                searchResult += "<tr><th>Name</th><th>Age</th><th>Position</th><th>Salary</th></tr>";
+                foundEmployees.forEach(function(employee) {
+                    searchResult += "<tr>";
+                    searchResult += "<td>" + employee.name + "</td>";
+                    searchResult += "<td>" + employee.age + "</td>";
+                    searchResult += "<td>" + employee.position + "</td>";
+                    searchResult += "<td>" + employee.salary + "</td>";
+                    searchResult += "</tr>";
+                });
+                searchResult += "</table>";
+                document.getElementById("employeeData").innerHTML = searchResult;
+            } else {
+                alert("Employee not found!");
+            }
+        }
+    </script>
+</body>
+</html>

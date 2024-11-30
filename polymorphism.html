@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fitness Activity Calculator</title>
+  <link rel="stylesheet" href="style.css">
+   <!-- Google Fonts - Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+</head>
+<body>
+  <div class="container-polymorphism">
+    <h1>Fitness Activity Calculator</h1>
+    <form id="activityForm">
+      <label for="exercise">Exercise:</label>
+      <select id="exercise" name="exercise">
+        <option value="running">Running</option>
+        <option value="weightlifting">Weightlifting</option>
+        <option value="swimming">Swimming</option>
+      </select>
+      <label for="reps">Number of Reps:</label>
+      <input type="number" id="reps" name="reps" min="1" step="1">
+      <label for="time">Time (hours):</label>
+      <input type="number" id="time" name="time" min="0" step="0.01">
+      <button type="submit">Calculate Calories</button>
+    </form>
+    <div id="result"></div>
+  </div>
+  
+  <!--
+    In this program, we have a FitnessActivity parent class and two child classes: Running, Weightlifting and Swimming. 
+    Each child class represents a specific fitness activity and overrides the describe method to provide additional details about the activity. 
+    Additionally, each child class overrides the calculateCaloriesBurned method to adjust the calories burned calculation based on specific factors related to that activity.
+    When we create instances of these classes and call the describe and calculateCaloriesBurned methods on them, we observe polymorphic behavior as the appropriate method implementations based on the specific activity type are invoked.
+  -->
+
+  <script>
+    // Parent class
+      class FitnessActivity {
+          constructor(name, duration) {
+            this.name = name;
+            this.duration = duration;
+          }
+          
+          // Method to describe the activity
+          describe() {
+            return `This is a ${this.name} activity.`;
+          }
+          
+          // Method to calculate calories burned
+          calculateCaloriesBurned(caloriesPerMinute) {
+            return caloriesPerMinute * this.duration;
+          }
+        }
+        
+        // Child class 1
+        class Running extends FitnessActivity {
+          constructor(name, duration, distance) {
+            super(name, duration);
+            this.distance = distance;
+          }
+          
+          // Overriding the describe method for Running
+          describe() {
+            return `This is a ${this.name} activity. Distance: ${this.distance} km.`;
+          }
+          
+          // Overriding the calculateCaloriesBurned method for Running
+          calculateCaloriesBurned(caloriesPerMinute) {
+            // Adjusting calories burned based on speed and duration
+            const adjustedDuration = this.duration * (1 + (this.distance / 10)); // Adjusting for intensity
+            return super.calculateCaloriesBurned(caloriesPerMinute) * adjustedDuration / this.duration;
+          }
+        }
+        
+        // Child class 2
+        class Weightlifting extends FitnessActivity {
+          constructor(name, duration, sets, reps) {
+            super(name, duration);
+            this.sets = sets;
+            this.reps = reps;
+          }
+          
+          // Overriding the describe method for Weightlifting
+          describe() {
+            return `This is a ${this.name} activity. Sets: ${this.sets}, Reps: ${this.reps}.`;
+          }
+          
+          // Overriding the calculateCaloriesBurned method for Weightlifting
+          calculateCaloriesBurned(caloriesPerMinute) {
+            // Adjusting calories burned based on muscle mass involved
+            const muscleMassFactor = 1.2; // Weightlifting involves more muscle mass
+            return super.calculateCaloriesBurned(caloriesPerMinute) * muscleMassFactor;
+          }
+        }
+
+        // Chld 3 
+        class Swimming extends FitnessActivity {
+          constructor(name, duration, time, distance) {
+              super(name, duration);
+              this.time = time;
+              this.distance = distance;
+          }
+
+          // Overriding the describe method for Weightlifting
+          describe() {
+              return `This is a ${this.name} activity. Duration: ${this.duration} minutes, Time: ${this.time} hours, Distance: ${this.distance} km.`;
+          }
+
+          // Overriding the calculateCaloriesBurned method for Weightlifting
+          calculateCaloriesBurned(caloriesPerMinute) {
+              // Adjusting calories burned based on duration, distance, and intensity
+              const intensityFactor = 1 + (this.time / 2) + (this.distance / 10); // Adjusting for intensity
+              return super.calculateCaloriesBurned(caloriesPerMinute) * intensityFactor;
+          }
+      }
+        
+        // Function to handle form submission
+        function handleSubmit(event) {
+          event.preventDefault();
+          const exercise = document.getElementById('exercise').value;
+          const reps = parseInt(document.getElementById('reps').value);
+          const time = parseFloat(document.getElementById('time').value); // Retrieve time input
+          
+          let activity;
+          if (exercise.toLowerCase() === 'running') {
+            activity = new Running(exercise, 30, 5); // Default duration and distance for running
+          }
+          
+          else if (exercise.toLowerCase() === 'weightlifting') {
+            activity = new Weightlifting(exercise, 45, 3, reps); // Default duration and sets, reps based on user input
+          } 
+          
+          else if (exercise.toLowerCase() === 'swimming') {
+              activity = new Swimming(exercise, 30, time, 3); // Pass time as an argument
+          }
+        
+          else {
+            document.getElementById('result').innerText = 'Invalid exercise entered.';
+            return;
+          }
+        
+          // Displaying activity details and calories burned
+          document.getElementById('result').innerHTML = `<p>${activity.describe()}</p>`;
+          document.getElementById('result').innerHTML += `<p>Calories burned: ${activity.calculateCaloriesBurned(10)}</p>`;
+        }
+        
+        
+        // Event listener for form submission
+        document.getElementById('activityForm').addEventListener('submit', handleSubmit);
+  
+  </script>
+</html>
